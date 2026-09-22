@@ -63,5 +63,4 @@ CREATE TABLE IF NOT EXISTS atencion(
 	CONSTRAINT fk_atencion_paciente FOREIGN KEY (fk_run_paciente) REFERENCES paciente(run)
 );
 
-SELECT * FROM direccion;
 
