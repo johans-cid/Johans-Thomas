@@ -5,6 +5,7 @@ db = mysql.connector.connect(
     password="TurnosMedicos2026!",
     host="sistema-turnos-medicos.ce9u4ui4u8m8.us-east-1.rds.amazonaws.com",
     database="sistema_turnos_medicos"
+    # puerto: 3306
 )
 
 cursor = db.cursor()
