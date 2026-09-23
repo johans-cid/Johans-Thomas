@@ -62,3 +62,5 @@ CREATE TABLE IF NOT EXISTS atencion(
 	CONSTRAINT fk_atencion_horario FOREIGN KEY (fk_id_horario_atencion) REFERENCES horario_atencion(id_horario_atencion),
 	CONSTRAINT fk_atencion_paciente FOREIGN KEY (fk_run_paciente) REFERENCES paciente(run)
 );
+
+
