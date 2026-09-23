@@ -13,3 +13,4 @@ result = cursor.fetchall()
 
 for direccion in result:
     print(direccion)
+
