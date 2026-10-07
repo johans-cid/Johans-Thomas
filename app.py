@@ -2,8 +2,12 @@
 
 # cargar_menu()
 
-from datos.repositorios.repo_direccion import Listado_direcciones
+from datos.repositorios.repo_persona import Listado_personas
+from prettytable import prettytable
 
-paises = Listado_direcciones()
-print(paises)
+
+personas = Listado_personas()
+
+for persona in personas:
+    print(f"{persona.run} - {persona.nombre} - {persona.apellido} - {persona.fecha_nacimiento}")
 
