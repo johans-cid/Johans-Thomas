@@ -1,5 +1,6 @@
 from peewee import CharField, ForeignKeyField, Model
 from datos.conexion import conectar
+from datos.modelos.persona import Persona
 
 base_datos = conectar()
 

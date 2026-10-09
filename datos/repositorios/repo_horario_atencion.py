@@ -4,3 +4,5 @@ def Listado_HorarioAtencion():
     Atenciones = HorarioAtencion.select() 
     if Atenciones:
         return Atenciones
+
+    
