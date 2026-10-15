@@ -4,3 +4,4 @@ def Listado_profesionales():
     profesionales = Profesional.select() 
     if profesionales:
         return profesionales
+
