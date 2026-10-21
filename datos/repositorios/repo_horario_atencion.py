@@ -1,32 +1,40 @@
-from typing import Any
-
 from datos.modelos.horario_atencion import HorarioAtencion
 
 
-def Listado_HorarioAtencion():
-    return list(HorarioAtencion.select())
+def listado_horarios_atencion():
+    try:
+        horarios = HorarioAtencion.select()
+        if horarios:
+            return horarios
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def obtener_horario_atencion(id_horario_atencion: int) -> HorarioAtencion | None:
-    return HorarioAtencion.get_or_none(
-        HorarioAtencion.id_horario_atencion == id_horario_atencion
-    )
+    try:
+        horario = HorarioAtencion.get(
+            HorarioAtencion.id_horario_atencion == id_horario_atencion
+        )
+        if horario:
+            return horario
+    except Exception as error:
+        print(f'Error: {error}')
 
 
-def crear_horario_atencion(datos: dict[str, Any]) -> HorarioAtencion:
-    return HorarioAtencion.create(**datos)
-
-
-def actualizar_horario_atencion(id_horario_atencion: int, datos: dict[str, Any]) -> int:
-    datos = {k: v for k, v in datos.items() if k != "id_horario_atencion"}
-    if not datos:
-        return 0
-    return HorarioAtencion.update(**datos).where(
-        HorarioAtencion.id_horario_atencion == id_horario_atencion
-    ).execute()
+def guardar_horario_atencion(horario: HorarioAtencion):
+    try:
+        respuesta = horario.save()
+        if respuesta == 1:
+            print(f'Se ha guardado con éxito: {horario.id_horario_atencion}')
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def eliminar_horario_atencion(id_horario_atencion: int) -> int:
-    return HorarioAtencion.delete().where(
-        HorarioAtencion.id_horario_atencion == id_horario_atencion
-    ).execute()
+    try:
+        return HorarioAtencion.delete().where(
+            HorarioAtencion.id_horario_atencion == id_horario_atencion
+        ).execute()
+    except Exception as error:
+        print(f'Error: {error}')
+        return 0

@@ -1,26 +1,36 @@
-from typing import Any
-
 from datos.modelos.persona import Persona
 
 
-def Listado_personas():
-    return list(Persona.select())
+def listado_personas():
+    try:
+        personas = Persona.select().where(Persona.habilitado == True)
+        if personas:
+            return personas
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def obtener_persona(run: str) -> Persona | None:
-    return Persona.get_or_none(Persona.run == run)
+    try:
+        persona = Persona.get(Persona.run == run)
+        if persona:
+            return persona
+    except Exception as error:
+        print(f'Error: {error}')
 
 
-def crear_persona(datos: dict[str, Any]) -> Persona:
-    return Persona.create(**datos)
-
-
-def actualizar_persona(run: str, datos: dict[str, Any]) -> int:
-    datos = {k: v for k, v in datos.items() if k != "run"}
-    if not datos:
-        return 0
-    return Persona.update(**datos).where(Persona.run == run).execute()
+def guardar_persona(persona: Persona):
+    try:
+        respuesta = persona.save()
+        if respuesta == 1:
+            print(f'Se ha guardado con éxito: {persona.run}')
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def eliminar_persona(run: str) -> int:
-    return Persona.delete().where(Persona.run == run).execute()
+    try:
+        return Persona.delete().where(Persona.run == run).execute()
+    except Exception as error:
+        print(f'Error: {error}')
+        return 0

@@ -1,27 +1,36 @@
-from typing import Any
-
 from datos.modelos.paciente import Paciente
 
 
-def Listado_pacientes():
-    return list(Paciente.select())
+def listado_pacientes():
+    try:
+        pacientes = Paciente.select()
+        if pacientes:
+            return pacientes
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def obtener_paciente(run: str) -> Paciente | None:
-    return Paciente.get_or_none(Paciente.run == run)
+    try:
+        paciente = Paciente.get(Paciente.run == run)
+        if paciente:
+            return paciente
+    except Exception as error:
+        print(f'Error: {error}')
 
 
-def crear_paciente(datos: dict[str, Any]) -> Paciente:
-    return Paciente.create(**datos)
-
-
-
-def actualizar_paciente(run: str, datos: dict[str, Any]) -> int:
-    datos = {k: v for k, v in datos.items() if k != "run"}
-    if not datos:
-        return 0
-    return Paciente.update(**datos).where(Paciente.run == run).execute()
+def guardar_paciente(paciente: Paciente):
+    try:
+        respuesta = paciente.save()
+        if respuesta == 1:
+            print(f'Se ha guardado con éxito: {paciente.run}')
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def eliminar_paciente(run: str) -> int:
-    return Paciente.delete().where(Paciente.run == run).execute()
+    try:
+        return Paciente.delete().where(Paciente.run == run).execute()
+    except Exception as error:
+        print(f'Error: {error}')
+        return 0

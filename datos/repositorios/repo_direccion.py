@@ -1,26 +1,36 @@
-from typing import Any
-
 from datos.modelos.direccion import Direccion
 
 
-def Listado_direcciones():
-    return list(Direccion.select())
+def listado_direcciones():
+    try:
+        direcciones = Direccion.select()
+        if direcciones:
+            return direcciones
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def obtener_direccion(id_direccion: int) -> Direccion | None:
-    return Direccion.get_or_none(Direccion.id_direccion == id_direccion)
+    try:
+        direccion = Direccion.get(Direccion.id_direccion == id_direccion)
+        if direccion:
+            return direccion
+    except Exception as error:
+        print(f'Error: {error}')
 
 
-def crear_direccion(datos: dict[str, Any]) -> Direccion:
-    return Direccion.create(**datos)
-
-
-def actualizar_direccion(id_direccion: int, datos: dict[str, Any]) -> int:
-    datos = {k: v for k, v in datos.items() if k != "id_direccion"}
-    if not datos:
-        return 0
-    return Direccion.update(**datos).where(Direccion.id_direccion == id_direccion).execute()
+def guardar_direccion(direccion: Direccion):
+    try:
+        respuesta = direccion.save()
+        if respuesta == 1:
+            print(f'Se ha guardado con éxito: {direccion.id_direccion}')
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def eliminar_direccion(id_direccion: int) -> int:
-    return Direccion.delete().where(Direccion.id_direccion == id_direccion).execute()
+    try:
+        return Direccion.delete().where(Direccion.id_direccion == id_direccion).execute()
+    except Exception as error:
+        print(f'Error: {error}')
+        return 0

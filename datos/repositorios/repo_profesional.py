@@ -1,26 +1,36 @@
-from typing import Any
-
 from datos.modelos.profesional import Profesional
 
 
-def Listado_profesionales():
-    return list(Profesional.select())
+def listado_profesionales():
+    try:
+        profesionales = Profesional.select()
+        if profesionales:
+            return profesionales
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def obtener_profesional(run: str) -> Profesional | None:
-    return Profesional.get_or_none(Profesional.run == run)
+    try:
+        profesional = Profesional.get(Profesional.run == run)
+        if profesional:
+            return profesional
+    except Exception as error:
+        print(f'Error: {error}')
 
 
-def crear_profesional(datos: dict[str, Any]) -> Profesional:
-    return Profesional.create(**datos)
-
-
-def actualizar_profesional(run: str, datos: dict[str, Any]) -> int:
-    datos = {k: v for k, v in datos.items() if k != "run"}
-    if not datos:
-        return 0
-    return Profesional.update(**datos).where(Profesional.run == run).execute()
+def guardar_profesional(profesional: Profesional):
+    try:
+        respuesta = profesional.save()
+        if respuesta == 1:
+            print(f'Se ha guardado con éxito: {profesional.run}')
+    except Exception as error:
+        print(f'Error: {error}')
 
 
 def eliminar_profesional(run: str) -> int:
-    return Profesional.delete().where(Profesional.run == run).execute()
+    try:
+        return Profesional.delete().where(Profesional.run == run).execute()
+    except Exception as error:
+        print(f'Error: {error}')
+        return 0
