@@ -4,10 +4,6 @@ from datos.modelos.atencion import Atencion
 
 
 def Listado_atenciones():
-    return listar_atenciones()
-
-
-def listar_atenciones():
     return list(Atencion.select())
 
 

@@ -4,10 +4,6 @@ from datos.modelos.paciente import Paciente
 
 
 def Listado_pacientes():
-    return listar_pacientes()
-
-
-def listar_pacientes():
     return list(Paciente.select())
 
 
@@ -18,9 +14,6 @@ def obtener_paciente(run: str) -> Paciente | None:
 def crear_paciente(datos: dict[str, Any]) -> Paciente:
     return Paciente.create(**datos)
 
-
-def guardar_paciente(paciente: Paciente) -> int:
-    return paciente.save(force_insert=True)
 
 
 def actualizar_paciente(run: str, datos: dict[str, Any]) -> int:

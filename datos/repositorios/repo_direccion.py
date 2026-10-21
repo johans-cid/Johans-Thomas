@@ -4,10 +4,6 @@ from datos.modelos.direccion import Direccion
 
 
 def Listado_direcciones():
-    return listar_direcciones()
-
-
-def listar_direcciones():
     return list(Direccion.select())
 
 

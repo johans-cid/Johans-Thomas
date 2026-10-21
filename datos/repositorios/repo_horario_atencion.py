@@ -4,10 +4,6 @@ from datos.modelos.horario_atencion import HorarioAtencion
 
 
 def Listado_HorarioAtencion():
-    return listar_horarios_atencion()
-
-
-def listar_horarios_atencion():
     return list(HorarioAtencion.select())
 
 

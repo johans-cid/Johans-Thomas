@@ -4,10 +4,6 @@ from datos.modelos.persona import Persona
 
 
 def Listado_personas():
-    return listar_personas()
-
-
-def listar_personas():
     return list(Persona.select())
 
 

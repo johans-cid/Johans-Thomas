@@ -4,10 +4,6 @@ from datos.modelos.profesional import Profesional
 
 
 def Listado_profesionales():
-    return listar_profesionales()
-
-
-def listar_profesionales():
     return list(Profesional.select())
 
 
